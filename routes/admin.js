@@ -6,7 +6,12 @@ router.get('/', (req, res) => {
 })
 
 router.get('/users', (req, res) => {
-    res.render('users')
+    res.render('users', {
+        title: "Users"
+    })
 })
 
+router.get('/logout', (req, res) => {
+    res.redirect('/')
+})
 export default router

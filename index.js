@@ -1,5 +1,7 @@
 import express from "express"
 import { engine, create } from "express-handlebars"
+import mongoose from "mongoose"
+import 'dotenv/config'
 
 import AuthRouter from "./routes/auth.js"
 import AdminRouter from "./routes/admin.js"
@@ -11,10 +13,24 @@ app.set('view engine', 'hbs')
 app.set('views', './views')
 
 app.use(express.static("assets"))
+app.use(express.urlencoded({ extended: true }))
+app.use(express.json())
 app.use(AuthRouter)
 app.use(AdminRouter)
 
-const PORT = process.env.PROT || 1999
-app.listen(PORT, () => {
-    console.log("Server is running on the PORT =>", PORT);
-})
+const startApp = () => {
+    try {
+        mongoose.connect(process.env.MONGO_URI, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true
+        })
+        const PORT = process.env.PROT || 1999
+        app.listen(PORT, () => {
+            console.log("Server is running on the PORT =>", PORT);
+        })
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+startApp()

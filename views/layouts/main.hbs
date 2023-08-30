@@ -4,8 +4,14 @@
 <body>
 
     <div class="wrapper">
-   {{>navbar}}
+   {{>sidebar}}
+    <div id="body" class="active">
+      {{>navbar}}
+       <div class="content">
       {{{body}}}
+       </div>
+    </div>
+
     </div>
 
     

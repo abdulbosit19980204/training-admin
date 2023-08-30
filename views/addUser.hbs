@@ -43,8 +43,8 @@
                     </div>
                      <div class="line"></div><br>
                     <div class="mb-3">
-                        <label for="address" class="form-label">Address</label>
-                        <input type="text" class="form-control" name="address" placeholder="1234 Main St, Unit, Building, or Floor" required>
+                        <label for="adress" class="form-label">Address</label>
+                        <input type="text" class="form-control" name="adress" placeholder="1234 Main St, Unit, Building, or Floor" required>
                         <div class="valid-feedback">Looks good!</div>
                         <div class="invalid-feedback">Please enter your address.</div>
                     </div>
@@ -57,10 +57,10 @@
                         </div>
                         <div class="mb-3 col-md-4">
                             <label for="position" class="form-label">Position</label>
-                            <select id="position" name="state" class="form-select" required>
+                            <select id="position" name="position" class="form-select" required>
                                 <option value="" selected>Choose...</option>
-                                <option value="1">Sushist</option>
-                                <option value="2">Goryachik</option>
+                                <option value="Sushist">Sushist</option>
+                                <option value="Goryachik">Goryachik</option>
                             </select>
                             <div class="valid-feedback">Looks good!</div>
                             <div class="invalid-feedback">Please select a State.</div>
@@ -80,12 +80,23 @@
                         </label>
                         <div class="col-sm-10">
                             <div class="form-check form-switch">
-                                <input id="status" class="form-check-input" type="checkbox"  checked>
+                                <input id="status" name="status" class="form-check-input" type="checkbox"  checked>
                                 <label class="form-check-label" for="status">Active</label>
                             </div>
                         </div>
                     </div>
                     <div class="mb-3 col-md-6 ">
+                        <label class="col-sm-4">Privacy<br>
+                            <small class="text-info">Role</small>
+                        </label>
+                        <div class="col-sm-10">
+                            <div class="form-check form-switch">
+                                <input id="admin" name="admin" class="form-check-input" type="checkbox" >
+                                <label class="form-check-label" for="admin">Admin</label>
+                            </div>
+                        </div>
+                    </div>
+                    {{!-- <div class="mb-3 col-md-6 ">
                                             <label class="col-sm-2">Role <br>
                                                 <small class="text-info">User's role</small>
                                             </label>
@@ -103,7 +114,9 @@
                                                   </label>
                                                 </div>
                                             </div>
-                    </div>
+                    </div> --}}
+                    
+
                      </div>
                     
                     <div class="line"></div><br>

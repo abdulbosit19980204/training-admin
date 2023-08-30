@@ -13,18 +13,21 @@ router.get('/add-user', (req, res) => {
 
 //Posts
 
-router.post('/add-user', (req, res) => {
+router.post('/add-user', async(req, res) => {
     const userData = {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,
         password: req.body.password,
-        role: req.body.role,
+        adress: req.body.adress,
+        city: req.body.city,
         position: req.body.position,
-        status: req.body.status,
+        zip: req.body.zip,
+        admin: req.body.admin ? 'on' : 'off',
+        status: req.body.status ? 'on' : 'off',
     }
-    console.log(req.body);
-    console.log(userData);
+    const user = await User.create(userData)
+    console.log(user);
     res.redirect('/users')
 })
 

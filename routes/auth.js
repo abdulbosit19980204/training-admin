@@ -34,11 +34,17 @@ router.post('/login', async(req, res) => {
         res.redirect('/login')
         return
     }
-    if (exsistAdmin.admin == "off" || exsistAdmin.status == "off") {
-        req.flash('loginError', "You can't signin with your account status")
+    if (exsistAdmin.admin == "off") {
+        req.flash('loginError', "You are not admin")
         res.redirect('/login')
         return
     }
+    if (exsistAdmin.status == "off") {
+        req.flash('loginError', "Your account is suspended")
+        res.redirect('/login')
+        return
+    }
+
 
     const token = generateJWTToken(exsistAdmin._id)
     res.cookie("token", token, { httpOnly: true, secure: true })

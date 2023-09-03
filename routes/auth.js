@@ -1,6 +1,7 @@
 import { Router } from "express";
 import User from "../models/User.js";
 import bcrypt from "bcrypt"
+import { generateJWTToken } from "../services/token.js";
 
 const router = Router()
 router.get("/login", (req, res) => {
@@ -28,18 +29,19 @@ router.post('/login', async(req, res) => {
         res.redirect('/login')
         return
     }
-    const isPassEqual = await bcrypt.compare(email, exsistAdmin.email)
+    const isPassEqual = await bcrypt.compare(req.body.password, exsistAdmin.password)
     if (!isPassEqual) {
         req.flash("loginError", "Password is wrong")
         res.redirect('/login')
         return
     }
-    if (!exsistAdmin.admin) {
+    if (exsistAdmin.admin == "off") {
         req.flash('loginError', "You can't signin with your public account")
         res.redirect('/login')
         return
     }
-    console.log(exsistAdmin);
+    const token = generateJWTToken(exsistAdmin._id)
+    res.cookie("token", token, { httpOnly: true, secure: true })
     res.redirect('/')
 })
 router.post('/add-user', async(req, res) => {
@@ -50,7 +52,6 @@ router.post('/add-user', async(req, res) => {
         return
     }
     const hashedPassword = await bcrypt.hash(password, 10)
-        //  console.log(hashedPassword);
     const userData = {
         firstName: firstName,
         lastName: lastName,
@@ -69,8 +70,10 @@ router.post('/add-user', async(req, res) => {
         res.redirect('/add-user')
         return
     }
+
     const user = await User.create(userData)
-        // console.log(user);
+    const token = generateJWTToken(user._id)
+    res.cookie('token', token, { httpOnly: "true", secure: true })
     res.redirect('/users')
 })
 

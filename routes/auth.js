@@ -7,7 +7,6 @@ const router = Router()
 router.get("/login", (req, res) => {
     res.render('login', {
         title: "Login",
-        token: true,
         loginError: req.flash('loginError')
     })
 })

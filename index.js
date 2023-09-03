@@ -6,6 +6,7 @@ import 'dotenv/config'
 
 import AuthRouter from "./routes/auth.js"
 import AdminRouter from "./routes/admin.js"
+import session from "express-session"
 
 const app = express()
 const hbs = create({ defaultLayout: 'main', extname: 'hbs' })
@@ -16,8 +17,9 @@ app.set('views', './views')
 app.use(express.static("assets"))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
-app.use(express.cookieParser('keyboard cat'));
-app.use(express.session({ cookie: { maxAge: 60000 } }));
+app.use(session({ secret: "uzdev", resave: false, saveUninitialized: false }))
+    // app.use(express.cookieParser('keyboard cat'));
+    // app.use(express.session({ cookie: { maxAge: 60000 } }));
 app.use(flash())
 app.use(AuthRouter)
 app.use(AdminRouter)

@@ -1,8 +1,6 @@
 <div class="container">
 <div class="page-title">
     <h3>Add User</h3>
-    <span class="text-danger">{{#if addUserError}}{{addUserError}}{{/if}}</span>
-
 </div>
 <div class="row">
   
@@ -11,7 +9,16 @@
         <div class="card">
             {{!-- <div class="card-header">Add User</div> --}}
             <div class="card-body">
+                
+                    {{#if addUserError}}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Didn't add!</strong> {{addUserError}}.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {{else}}
                 <h5 class="card-title fw-semibold text-danger">Fill all fields before add new user</h5>
+        {{/if}}
+        
                 <form action="/add-user" method="post" class="needs-validation" novalidate accept-charset="utf-8">
 
                     <div class="line"></div><br>

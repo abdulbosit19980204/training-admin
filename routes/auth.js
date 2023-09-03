@@ -7,14 +7,14 @@ router.get("/login", (req, res) => {
     res.render('login', {
         title: "Login",
         token: true,
-        loginError: 'Error'
+        loginError: req.flash('loginError')
     })
 })
 
 
 router.get('/add-user', (req, res) => {
     res.render('addUser', {
-        addUserError: "User adding error"
+        addUserError: req.flash('userAddError')
     })
 })
 
@@ -24,12 +24,19 @@ router.post('/login', async(req, res) => {
     const exsistAdmin = await User.findOne({ email })
     if (!exsistAdmin) {
 
-        req.flash("loginError", "Admin not found")
+        req.flash("loginError", "You should check in on some of those fields below")
+        res.redirect('/login')
         return
     }
     const isPassEqual = await bcrypt.compare(email, exsistAdmin.email)
     if (!isPassEqual) {
-        console.log("Password is wrong");
+        req.flash("loginError", "Password is wrong")
+        res.redirect('/login')
+        return
+    }
+    if (!exsistAdmin.admin) {
+        req.flash('loginError', "You can't signin with your public account")
+        res.redirect('/login')
         return
     }
     console.log(exsistAdmin);
@@ -37,6 +44,11 @@ router.post('/login', async(req, res) => {
 })
 router.post('/add-user', async(req, res) => {
     const { firstName, lastName, email, password, adress, city, position, zip, admin, status } = req.body
+    if (!firstName || !lastName || !email || !password) {
+        req.flash('userAddError', "All fields are required")
+        res.redirect('/add-user')
+        return
+    }
     const hashedPassword = await bcrypt.hash(password, 10)
         //  console.log(hashedPassword);
     const userData = {
@@ -50,6 +62,12 @@ router.post('/add-user', async(req, res) => {
         zip: zip,
         admin: admin ? 'on' : 'off',
         status: status ? 'on' : 'off',
+    }
+    const isUserExsist = await User.findOne({ email })
+    if (isUserExsist) {
+        req.flash('userAddError', 'User is already exsist')
+        res.redirect('/add-user')
+        return
     }
     const user = await User.create(userData)
         // console.log(user);

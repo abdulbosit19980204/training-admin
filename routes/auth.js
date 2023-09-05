@@ -18,7 +18,11 @@ router.get('/add-user', (req, res) => {
     })
 })
 
-//Posts
+router.get('/logout', (req, res) => {
+        res.clearCookie("token")
+        return
+    })
+    //Posts
 router.post('/login', async(req, res) => {
     const { email, password, remember } = req.body
     const exsistAdmin = await User.findOne({ email })

@@ -2,6 +2,8 @@ import express from "express"
 import { engine, create } from "express-handlebars"
 import mongoose from "mongoose"
 import flash from "connect-flash"
+import cookieParser from "cookie-parser"
+import varMiddleware from "./middleware/var.js"
 import 'dotenv/config'
 
 import AuthRouter from "./routes/auth.js"
@@ -18,8 +20,8 @@ app.use(express.static("assets"))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(session({ secret: "uzdev", resave: false, saveUninitialized: false }))
-    // app.use(express.cookieParser('keyboard cat'));
-    // app.use(express.session({ cookie: { maxAge: 60000 } }));
+app.use(cookieParser())
+app.use(varMiddleware)
 app.use(flash())
 app.use(AuthRouter)
 app.use(AdminRouter)

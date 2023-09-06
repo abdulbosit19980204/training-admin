@@ -4,10 +4,12 @@ import mongoose from "mongoose"
 import flash from "connect-flash"
 import cookieParser from "cookie-parser"
 import varMiddleware from "./middleware/var.js"
+
 import 'dotenv/config'
 
 import AuthRouter from "./routes/auth.js"
 import AdminRouter from "./routes/admin.js"
+import LessonsRouter from "./routes/lessons.js"
 import session from "express-session"
 
 const app = express()
@@ -25,6 +27,7 @@ app.use(varMiddleware)
 app.use(flash())
 app.use(AuthRouter)
 app.use(AdminRouter)
+app.use(LessonsRouter)
 
 const startApp = () => {
     try {

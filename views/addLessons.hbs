@@ -105,16 +105,16 @@
                         <form action="/add-lesson" method="post" class="needs-validation" novalidate accept-charset="utf-8">
                             <div class="row g-2">
                                 <div class="mb-3 col-md-6">
-                                    <label for="email" class="form-label">Email</label>
-                                    <input type="email" class="form-control" name="email" placeholder="Email" required>
-                                    <small class="form-text text-muted">Enter a valid email address.</small>
+                                    <label for="lessonTitle" class="form-label">Title</label>
+                                    <input type="text" class="form-control" name="lessonTitle" placeholder="Title" required>
+                                    <small class="form-text text-muted">Enter a title.</small>
                                     <div class="valid-feedback">Looks good!</div>
-                                    <div class="invalid-feedback">Please enter your email address.</div>
+                                    <div class="invalid-feedback">Please enter lesson's title address.</div>
                                 </div>
                                 <div class="mb-3 col-md-6">
-                                    <label for="password" class="form-label">Password</label>
-                                    <input type="password" class="form-control" name="password" placeholder="Password" required>
-                                    <small class="form-text text-muted">Your password must be 8-20 characters long, contain letters and numbers only.</small>
+                                    <label for="lessonDescription" class="form-label">Password</label>
+                                    <input type="text" class="form-control" name="lessonDescription" placeholder="Description" required>
+                                    <small class="form-text text-muted">Your description must be 8-20 characters long, contain letters and numbers only.</small>
                                     <div class="valid-feedback">Looks good!</div>
                                     <div class="invalid-feedback">Please enter your password.</div>
                                 </div>
@@ -128,15 +128,9 @@
                             <div class="mb-3">
                                 <label for="lessonDetails" class="form-label">Details</label>
                                     <textarea name="lessonDetails">
-                                    Welcome to TinyMCE!
+                                    Cleare this and add lesson details
                                 </textarea>
-                                <script>
-                                    tinymce.init({
-                                    selector: 'textarea',
-                                    plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
-                                    toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
-                                    });
-                                </script>
+                                
                             </div>
                             <div class="row g-2">
                                 <div class="mb-3 col-md-6">
@@ -155,6 +149,7 @@
                                     <div class="valid-feedback">Looks good!</div>
                                     <div class="invalid-feedback">Please select a State.</div>
                                 </div>
+                                
                                 <div class="mb-3 col-md-2">
                                     <label for="zip" class="form-label">Zip code</label>
                                     <input type="text" class="form-control" name="zip" placeholder="00000" required>

@@ -1,6 +1,9 @@
 import { Schema, model } from "mongoose";
 
 const LessonSchema = new Schema({
+    lessonTitle: { type: String, required: true },
+    lessonDescription: { type: String, required: true },
+    lessonDetails: { type: String, required: true },
 
 })
 

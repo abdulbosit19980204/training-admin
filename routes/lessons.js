@@ -1,12 +1,14 @@
 import { Router } from "express";
 import Restaurant from "../models/Restaurants.js";
 import Part from "../models/Part.js";
+
 const router = Router()
 
-router.get('/forms', (req, res) => {
+router.get('/forms', async(req, res) => {
+
     res.render('addLessons', {
         title: "Adding information and Lessons",
-        error: req.flash('errorAddInformation')
+        error: req.flash('errorAddInformation'),
     })
 })
 

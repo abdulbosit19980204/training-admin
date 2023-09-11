@@ -1,10 +1,12 @@
 import { Router } from "express";
 import Restaurant from "../models/Restaurants.js";
 import Part from "../models/Part.js";
+import Lesson from "../models/Lesson.js";
+import authMiddleware from "../middleware/auth.js";
 
 const router = Router()
 
-router.get('/forms', async(req, res) => {
+router.get('/forms', authMiddleware, async(req, res) => {
 
     res.render('addLessons', {
         title: "Adding information and Lessons",
@@ -40,7 +42,7 @@ router.post('/add-lessons-part', async(req, res) => {
     }
     const PartData = {
         lessonsTypeName: lessonsTypeName,
-        lessonsTypeImg: lessonsTypeImg
+        lessonsTypeImg: lessonsTypeImg,
     }
 
     const lessonsPart = await Part.create(PartData)
@@ -50,8 +52,22 @@ router.post('/add-lessons-part', async(req, res) => {
 })
 
 
-router.post('/add-lesson', (req, res) => {
-    console.log(req.body);
+router.post('/add-lesson', async(req, res) => {
+    const { lessonTitle, lessonDescription, lessonimgPath, lessonDetails, lessonPart } = req.body
+    if (!lessonTitle || !lessonDescription || !lessonDetails) {
+        req.flash('errorAddInformation', 'Please add all important information')
+        res.redirect('/forms')
+        return
+    }
+    const lessonData = {
+        lessonTitle: lessonTitle,
+        lessonDescription: lessonDescription,
+        lessonimgPath: lessonimgPath,
+        lessonDetails: lessonDetails,
+        lessonPart: lessonPart,
+        lessonDone: false,
+    }
+    const LessonInfo = await Lesson.create(lessonData)
     res.redirect('/forms')
     return
 })

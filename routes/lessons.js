@@ -3,6 +3,7 @@ import Restaurant from "../models/Restaurants.js";
 import Part from "../models/Part.js";
 import Lesson from "../models/Lesson.js";
 import authMiddleware from "../middleware/auth.js";
+import userMiddleware from "../middleware/user.js";
 
 const router = Router()
 
@@ -52,13 +53,14 @@ router.post('/add-lessons-part', async(req, res) => {
 })
 
 
-router.post('/add-lesson', async(req, res) => {
+router.post('/add-lesson', userMiddleware, async(req, res) => {
     const { lessonTitle, lessonDescription, lessonimgPath, lessonDetails, lessonPart } = req.body
     if (!lessonTitle || !lessonDescription || !lessonDetails) {
         req.flash('errorAddInformation', 'Please add all important information')
         res.redirect('/forms')
         return
     }
+
     const lessonData = {
         lessonTitle: lessonTitle,
         lessonDescription: lessonDescription,
@@ -67,7 +69,7 @@ router.post('/add-lesson', async(req, res) => {
         lessonPart: lessonPart,
         lessonDone: false,
     }
-    const LessonInfo = await Lesson.create(lessonData)
+    const LessonInfo = await Lesson.create({...lessonData, user: req.userId })
     res.redirect('/forms')
     return
 })

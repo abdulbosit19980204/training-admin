@@ -8,10 +8,14 @@ import userMiddleware from "../middleware/user.js";
 const router = Router()
 
 router.get('/forms', authMiddleware, async(req, res) => {
+    const Parts = await Part.find().lean()
+    const Restaurants = await Restaurant.find().lean()
 
     res.render('addLessons', {
         title: "Adding information and Lessons",
         error: req.flash('errorAddInformation'),
+        parts: Parts,
+        restaurants: Restaurants,
     })
 })
 
@@ -54,22 +58,16 @@ router.post('/add-lessons-part', async(req, res) => {
 
 
 router.post('/add-lesson', userMiddleware, async(req, res) => {
-    const { lessonTitle, lessonDescription, lessonimgPath, lessonDetails, lessonPart } = req.body
+    console.log(req.body);
+    const { lessonTitle, lessonDescription, lessonDetails } = req.body
     if (!lessonTitle || !lessonDescription || !lessonDetails) {
         req.flash('errorAddInformation', 'Please add all important information')
         res.redirect('/forms')
         return
     }
 
-    const lessonData = {
-        lessonTitle: lessonTitle,
-        lessonDescription: lessonDescription,
-        lessonimgPath: lessonimgPath,
-        lessonDetails: lessonDetails,
-        lessonPart: lessonPart,
-        lessonDone: false,
-    }
-    const LessonInfo = await Lesson.create({...lessonData, user: req.userId })
+
+    const LessonInfo = await Lesson.create({...req.body, user: req.userId })
     res.redirect('/forms')
     return
 })

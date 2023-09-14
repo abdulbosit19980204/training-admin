@@ -1,4 +1,5 @@
 import { Router } from "express";
+import User from "../models/User.js"
 const router = Router()
 
 router.get('/', (req, res) => {
@@ -7,9 +8,12 @@ router.get('/', (req, res) => {
     })
 })
 
-router.get('/users', (req, res) => {
+router.get('/users', async(req, res) => {
+    const usersDetail = await User.find().lean()
+    console.log(usersDetail);
     res.render('users', {
-        title: "Users"
+        title: "Users",
+        users: usersDetail
     })
 })
 

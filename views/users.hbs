@@ -13,12 +13,37 @@
                         <th>Name</th>
                         <th>Email</th>
                         <th>Role</th>
-                        <th>Type</th>
+                        <th>Admin</th>
                         <th>Status</th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
+                        {{#each users}}
+                    <tr>
+                        <td>{{firstName}} {{lastName}}</td>
+                        <td>{{email}}</td>
+                        <td>{{position}}</td>
+                        <td>
+                            {{#if admin}}
+                            <div class="form-check form-switch">
+                            {{!-- <label class="form-check-label" for="flexSwitchCheckChecked">Admin</label> --}}
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked disabled>
+                            </div>
+                            {{else}}
+                            <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" >
+                            {{!-- <label class="form-check-label" for="flexSwitchCheckChecked">User</label> --}}
+                            </div>
+                            {{/if}}
+                        </td>
+                        <td>{{status}}</td>
+                        <td class="text-end">
+                            <a href="" class="btn btn-outline-info btn-rounded"><i class="fas fa-pen"></i></a>
+                            <a href="" class="btn btn-outline-danger btn-rounded"><i class="fas fa-trash"></i></a>
+                        </td>
+                    </tr>
+                        {{/each}}
                     <tr>
                         <td>Philip Chaney</td>
                         <td>philip.chaney@gmail.com</td>

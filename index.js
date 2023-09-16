@@ -11,6 +11,7 @@ import AuthRouter from "./routes/auth.js"
 import AdminRouter from "./routes/admin.js"
 import LessonsRouter from "./routes/lessons.js"
 import session from "express-session"
+import userMiddleware from "./middleware/user.js"
 
 const app = express()
 const hbs = create({ defaultLayout: 'main', extname: 'hbs' })
@@ -24,6 +25,7 @@ app.use(express.json())
 app.use(session({ secret: "uzdev", resave: false, saveUninitialized: false }))
 app.use(cookieParser())
 app.use(varMiddleware)
+app.use(userMiddleware)
 app.use(flash())
 app.use(AuthRouter)
 app.use(AdminRouter)

@@ -2,7 +2,10 @@ import { Router } from "express";
 import User from "../models/User.js"
 const router = Router()
 
-router.get('/', (req, res) => {
+router.get('/', async(req, res) => {
+    // const userDetail = await User.findById(req.cookies.token)
+    console.log(req.cookies.token);
+    // console.log(userDetail);
     res.render('index', {
         title: "Home"
     })

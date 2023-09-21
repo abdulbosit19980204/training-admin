@@ -19,6 +19,13 @@ router.get('/forms', authMiddleware, async(req, res) => {
     })
 })
 
+router.get('/edit-lesson/:id', async(req, res) => {
+    const id = req.params.id
+    const editedLessonDetails = await Lesson.findByIdAndUpdate(id)
+    console.log(editedLessonDetails);
+    res.render('editLessons')
+    return
+})
 
 //Posts
 

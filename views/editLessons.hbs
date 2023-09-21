@@ -1,0 +1,196 @@
+<div class="content">
+    <div class="container">
+        <div class="page-title">
+            <h3>Add Lessons Parts</h3>
+        </div>
+        {{#if error}}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Error!</strong> {{error}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {{/if}}
+        <div class="row">
+            
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header">Modal Form</div>
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Add new restaurant </h5>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addNewRestaurant">Add Restaurant</button>
+                        <div class="modal fade" id="addNewRestaurant" role="dialog" tabindex="-1">
+                            <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <h5 class="modal-title">Add new restaurant</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body text-start">
+                                <p>New Restaurant informations</p>
+                                <form action="/add-restaurant" method="post" accept-charset="utf-8">
+                                    <div class="mb-3">
+                                        <label for="restaurantName" class="form-label">Name</label>
+                                        <input type="text" name="restaurantName" placeholder="Restaurant name" class="form-control">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="restaurantImg" class="form-label">Restaurant logo</label>
+                                        <input type="text" name="restaurantImg" placeholder="Restaurant image" class="form-control">
+                                    </div>
+                                    <div class="mb-3">
+                                        <button type="submit" class="btn btn-primary">Save</button>
+                                    </div>
+                                </form>
+                                </div>
+                                <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header">Modal Form</div>
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Add new lessons part</h5>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addLessonsType">Launch form</button>
+                        <div class="modal fade" id="addLessonsType" role="dialog" tabindex="-1">
+                            <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <h5 class="modal-title">Add new lessons part</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body text-start">
+                                <p>Add type of lessons</p>
+                                <form action="/add-lessons-part" method="post" accept-charset="utf-8">
+                                    <div class="mb-3">
+                                        <label for="lessonsTypeName" class="form-label">Part name</label>
+                                        <input type="text" name="lessonsTypeName" placeholder="Part name" class="form-control">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="lessonsTypeImg" class="form-label">Image</label>
+                                        <input type="text" name="lessonsTypeImg" placeholder="Image link" class="form-control">
+                                    </div>
+                                    <div class="mb-3">
+                                    <label for="restaurant" class="form-label">Restaurant</label>
+                                    <select name="restaurant" class="form-select" required>
+                                        <option value="" selected>Choose...</option>
+                                        <option value="1">Yaponamama</option>
+                                        <option value="2">FeedUp</option>
+                                    </select>
+                                    <div class="valid-feedback">Looks good!</div>
+                                    <div class="invalid-feedback">Please select a State.</div>
+                                </div>
+                                    <div class="mb-3">
+                                        <button type="submit" class="btn btn-primary">Save</button>
+                                    </div>
+                                </form>
+                                </div>
+                                <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">Form Validation</div>
+                    <div class="card-body">
+                        <h5 class="card-title">Example form with inline field validations</h5>
+                        <form action="/add-lesson" method="post" class="needs-validation" novalidate accept-charset="utf-8">
+                            <div class="row g-2">
+                                <div class="mb-3 col-md-6">
+                                    <label for="lessonTitle" class="form-label">Title</label>
+                                    <input type="text" class="form-control" name="lessonTitle" placeholder="Title" required>
+                                    <small class="form-text text-muted">Enter a title.</small>
+                                    <div class="valid-feedback">Looks good!</div>
+                                    <div class="invalid-feedback">Please enter lesson's title address.</div>
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label for="lessonDescription" class="form-label">Description</label>
+                                    <input type="text" class="form-control" name="lessonDescription" placeholder="Description" required>
+                                    <small class="form-text text-muted">Your description must be 8-20 characters long, contain letters and numbers only.</small>
+                                    <div class="valid-feedback">Looks good!</div>
+                                    <div class="invalid-feedback">Please enter your password.</div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="lessonimgPath" class="form-label">Image path</label>
+                                <input type="text" class="form-control" name="lessonimgPath" placeholder="./img/jgp.png" required>
+                                <div class="valid-feedback">Looks good!</div>
+                                <div class="invalid-feedback">Please enter image's path.</div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="lessonDetails" class="form-label">Details</label>
+                                    <textarea name="lessonDetails">
+                                    Cleare this and add lesson details
+                                </textarea>
+                                
+                            </div>
+                            <div class="row g-2">
+                                {{!-- <div class="mb-3 col-md-6">
+                                    <label for="city" class="form-label">City</label>
+                                    <input type="text" class="form-control" name="city" placeholder="City" required>
+                                    <div class="valid-feedback">Looks good!</div>
+                                    <div class="invalid-feedback">Please enter your City.</div>
+                                </div> --}}
+                                 <div class="mb-3 col-md-4">
+                                    <label for="restaurant" class="form-label">Restaurant</label>
+                                    <select name="restaurant" class="form-select" required>
+                                    {{#each restaurants}}
+                                        {{!-- <option value="" selected>Choose...</option> --}}
+                                        <option value="{{restaurantName}}">{{restaurantName}} <img src="https://www.seekpng.com/png/detail/18-184210_chef-hat-clipart-at-getdrawings-free-koki-vector.png" alt=""></option>
+                                        {{!-- <option value="2">Goryachka</option> --}}
+                                    {{/each}}
+                                    </select>
+                                    <div class="valid-feedback">Looks good!</div>
+                                    <div class="invalid-feedback">Please select a State.</div>
+                                </div>
+                                
+                                <div class="mb-3 col-md-4">
+                                    <label for="lessonPart" class="form-label">Part</label>
+                                    <select name="lessonPart" class="form-select" required>
+                                        {{#if parts.length}}
+                                    {{#each parts}}
+                                        {{!-- <option value="" selected>Choose...</option> --}}
+                                        <option value="{{lessonsTypeName}}">{{lessonsTypeName}}</option>
+                                        {{!-- <option value="2">Goryachka</option> --}}
+                                    {{/each}}
+                                    {{else}}
+                                        <option value="">No element</option>
+                                    {{/if}}
+                                    </select>
+                                    <div class="valid-feedback">Looks good!</div>
+                                    <div class="invalid-feedback">Please select a State.</div>
+                                </div>
+                                
+                                <div class="mb-3 col-md-2">
+                                    <label for="zip" class="form-label">Zip code</label>
+                                    <input type="text" class="form-control" name="zip" placeholder="00000" required>
+                                    <div class="valid-feedback">Looks good!</div>
+                                    <div class="invalid-feedback">Please enter a Zip code.</div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="check1" required>
+                                    <label class="form-check-label" for="check1">
+                                    Check me out
+                                    </label>
+                                    <div class="invalid-feedback">You must agree before submitting.</div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>

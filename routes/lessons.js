@@ -21,9 +21,21 @@ router.get('/forms', authMiddleware, async(req, res) => {
 
 router.get('/edit-lesson/:id', async(req, res) => {
     const id = req.params.id
-    const editedLessonDetails = await Lesson.findByIdAndUpdate(id)
+    const editedLessonDetails = await Lesson.findById(id)
     console.log(editedLessonDetails);
-    res.render('editLessons')
+    res.render('editLessons', {
+        title: "Edit",
+        editedLessonDetails: editedLessonDetails,
+    })
+    return
+})
+
+router.get('/my-lessons', async(req, res) => {
+    const lessons = await Lesson.find().lean()
+    res.render('myLessons', {
+        title: "My Lessons",
+        lessons: lessons,
+    })
     return
 })
 

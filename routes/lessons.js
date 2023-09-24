@@ -22,18 +22,26 @@ router.get('/forms', authMiddleware, async(req, res) => {
 router.get('/edit-lesson/:id', async(req, res) => {
     const id = req.params.id
     const editedLessonDetails = await Lesson.findById(id).populate('user').lean()
+    const Restaurants = await Restaurant.find().lean()
+    const Parts = await Part.find().lean()
     res.render('editLessons', {
         title: "Edit",
         editedLessonDetails: editedLessonDetails,
+        parts: Parts,
+        restaurants: Restaurants,
     })
     return
 })
 
 router.get('/my-lessons', async(req, res) => {
+
     const lessons = await Lesson.find().lean()
+
     res.render('myLessons', {
         title: "My Lessons",
         lessons: lessons,
+
+
     })
     return
 })
@@ -69,14 +77,12 @@ router.post('/add-lessons-part', async(req, res) => {
     }
 
     const lessonsPart = await Part.create(PartData)
-    console.log(lessonsPart);
     res.redirect('/forms')
     return
 })
 
 
 router.post('/add-lesson', userMiddleware, async(req, res) => {
-    console.log(req.body);
     const { lessonTitle, lessonDescription, lessonDetails } = req.body
     if (!lessonTitle || !lessonDescription || !lessonDetails) {
         req.flash('errorAddInformation', 'Please add all important information')
@@ -88,5 +94,18 @@ router.post('/add-lesson', userMiddleware, async(req, res) => {
     const LessonInfo = await Lesson.create({...req.body, user: req.userId })
     res.redirect('/forms')
     return
+})
+
+router.post('/edit-lesson/:id', async(req, res) => {
+    const { lessonTitle, lessonDescription, lessonimgPath, lessonDetails, lessonsPart } = req.body
+    const id = req.params.id
+    console.log(id);
+    if (!lessonTitle || !lessonDescription || !lessonDetails) {
+        req.flash('errorEditLesson', 'Please add all important information')
+        res.redirect('/my-lessons')
+        return
+    }
+    const updatedLesson = await Lesson.findByIdAndUpdate(id, req.body)
+    res.redirect('/my-lessons')
 })
 export default router

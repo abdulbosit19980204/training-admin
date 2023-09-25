@@ -18,7 +18,6 @@ router.get('/', async(req, res) => {
 
 router.get('/users', async(req, res) => {
     const usersDetail = await User.find().lean()
-    console.log(usersDetail);
     res.render('users', {
         title: "Users",
         users: usersDetail

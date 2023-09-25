@@ -100,7 +100,6 @@ router.post('/add-lesson', userMiddleware, async(req, res) => {
 router.post('/edit-lesson/:id', async(req, res) => {
     const { lessonTitle, lessonDescription, lessonimgPath, lessonDetails, lessonsPart } = req.body
     const id = req.params.id
-    console.log(id);
     if (!lessonTitle || !lessonDescription || !lessonDetails) {
         req.flash('errorEditLesson', 'Please add all important information')
         res.redirect('/my-lessons')

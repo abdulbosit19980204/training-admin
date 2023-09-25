@@ -13,7 +13,7 @@
                         <th>Title</th>
                         <th>Part</th>
                         <th>Restaurant</th>
-                        <th>Admin</th>
+                        <th>Status</th>
                         <th>Created at</th>
                         <th>Updated at</th>
                     </tr>
@@ -21,7 +21,7 @@
                 <tbody>
                         {{#each lessons}}
                     <tr>
-                        <td> <img src="{{lessonimgPath}}" class="col-1 rounded-circle" alt="" srcset=""> {{lessonTitle}}</td>
+                        <td> <img src="{{lessonimgPath}}" class=" col-8 col-lg-2 rounded-circle" alt="" srcset=""> <span class="fw-bold"> {{lessonTitle}} </span></td>
                         <td>{{lessonPart}}</td>
                         <td>{{restaurant}}</td>
                         <td>

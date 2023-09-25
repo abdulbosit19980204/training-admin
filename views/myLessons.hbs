@@ -2,7 +2,7 @@
     <div class="page-title">
         <h3>Lessons
             <a href="roles.html" class="btn btn-sm btn-outline-primary float-end"><i class="fas fa-user-shield"></i> Roles</a>
-            <a href="/add-user" class="btn btn-sm btn-outline-primary float-end mx-2"><i class="fas fa-user-plus"></i> Add user</a>
+            <a href="/forms" class="btn btn-sm btn-outline-primary float-end mx-2"><i class="fas fa-plus"></i> Add Lesson</a>
         </h3>
     </div>
     <div class="box box-primary">
@@ -21,7 +21,7 @@
                 <tbody>
                         {{#each lessons}}
                     <tr>
-                        <td>{{lessonTitle}}</td>
+                        <td> <img src="{{lessonimgPath}}" class="col-1 rounded-circle" alt="" srcset=""> {{lessonTitle}}</td>
                         <td>{{lessonPart}}</td>
                         <td>{{restaurant}}</td>
                         <td>
@@ -38,7 +38,7 @@
                             {{/if}}
                         </td>
                         <td>{{createdAt}}</td>
-                        <td>{{UpdatedAt}}</td>
+                        <td>{{updatedAt}}</td>
                         <td class="text-end">
                             <a href="/edit-lesson/{{_id}}" class="btn btn-outline-info btn-rounded"><i class="fas fa-pen"></i></a>
                             <a href="" class="btn btn-outline-danger btn-rounded"><i class="fas fa-trash"></i></a>

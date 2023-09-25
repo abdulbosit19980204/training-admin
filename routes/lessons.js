@@ -29,6 +29,7 @@ router.get('/edit-lesson/:id', async(req, res) => {
         editedLessonDetails: editedLessonDetails,
         parts: Parts,
         restaurants: Restaurants,
+        error: req.flash('errorEditLesson')
     })
     return
 })

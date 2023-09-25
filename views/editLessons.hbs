@@ -137,8 +137,8 @@
                                  <div class="mb-3 col-md-4">
                                     <label for="restaurant" class="form-label">Restaurant</label>
                                     <select name="restaurant" class="form-select" required>
+                                        <option value="{{editedLessonDetails.restaurant}}" selected>{{editedLessonDetails.restaurant}}</option>
                                     {{#each restaurants}}
-                                        <option value="" selected>{{editedLessonDetails.restaurantName}}</option>
                                         <option value="{{restaurantName}}">{{restaurantName}} <img src="https://www.seekpng.com/png/detail/18-184210_chef-hat-clipart-at-getdrawings-free-koki-vector.png" alt=""></option>
                                         {{!-- <option value="2">Goryachka</option> --}}
                                     {{/each}}
@@ -150,9 +150,9 @@
                                 <div class="mb-3 col-md-4">
                                     <label for="lessonPart" class="form-label">Part</label>
                                     <select name="lessonPart" class="form-select" required>
+                                        <option value="{{editedLessonDetails.lessonPart}}" selected>{{editedLessonDetails.lessonPart}}</option>
                                         {{#if parts.length}}
                                     {{#each parts}}
-                                        <option value="" selected>{{editedLessonDetails.lessonsTypeName}}</option>
                                         <option value="{{lessonsTypeName}}">{{lessonsTypeName}}</option>
                                         {{!-- <option value="2">Goryachka</option> --}}
                                     {{/each}}
@@ -180,7 +180,8 @@
                                     <div class="invalid-feedback">You must agree before submitting.</div>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save</button>
+                            <button type="submit" class="btn btn-outline-primary"><i class="fas fa-save"></i> Save</button>
+                            <a href="/my-lessons" class="btn btn-outline-danger"><i class="fas fa-history"></i> Cancel</a>
                         </form>
                     </div>
                 </div>

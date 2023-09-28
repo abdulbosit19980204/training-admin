@@ -62,7 +62,7 @@ router.post('/login', async(req, res) => {
     res.redirect('/')
 })
 router.post('/add-user', async(req, res) => {
-    const { firstName, lastName, email, password, adress, city, position, zip, admin, status } = req.body
+    const { firstName, lastName, userImg, email, password, adress, city, position, zip, admin, status } = req.body
     if (!firstName || !lastName || !email || !password) {
         req.flash('userAddError', "All fields are required")
         res.redirect('/add-user')
@@ -72,6 +72,7 @@ router.post('/add-user', async(req, res) => {
     const userData = {
         firstName: firstName,
         lastName: lastName,
+        userImg: userImg ? userImg : "https://st.depositphotos.com/3079665/3991/v/450/depositphotos_39915779-stock-illustration-chef-giving-thumbs-up.jpg",
         email: email,
         password: hashedPassword,
         adress: adress,
@@ -93,5 +94,7 @@ router.post('/add-user', async(req, res) => {
     res.cookie('token', token, { httpOnly: "true", secure: true })
     res.redirect('/users')
 })
+
+
 
 export default router

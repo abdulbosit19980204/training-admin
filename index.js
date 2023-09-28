@@ -12,9 +12,10 @@ import AdminRouter from "./routes/admin.js"
 import LessonsRouter from "./routes/lessons.js"
 import session from "express-session"
 import userMiddleware from "./middleware/user.js"
+import helpers from "./utils/index.js"
 
 const app = express()
-const hbs = create({ defaultLayout: 'main', extname: 'hbs' })
+const hbs = create({ defaultLayout: 'main', extname: 'hbs', helpers: helpers })
 app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs')
 app.set('views', './views')

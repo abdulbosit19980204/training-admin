@@ -1,0 +1,27 @@
+<div class="container text-center mt-5 mb-5">
+  <div class="row">
+    <div class="col-12">
+      <p class="fs-3 fw-bolder">Restaurants</p>
+    </div>
+  </div>
+  
+  <div class="row justify-content-center p-4">
+   {{#each restaurantData}}
+    <div class="col-12 col-md-2 mt-3">
+      <a href="/" class="text-decoration-none text-black">
+        <div class="rounded-4 border border-light-subtle text-center p-3 custom-border">
+          <img class="rounded-5 mb-3" style="height: 50px;" src="{{restaurantImg}}" alt="">
+          <br><span class="fs-5 fw-semibold">{{restaurantName}}</span>
+          <div class="card-footer mt-3 p-1 bg-light rounded-3 text-black-50 fw-semibold"> 
+            <td class="text-end">
+                <a href="/edit-lesson/{{_id}}" class="btn btn-outline-info btn-rounded"><i class="fas fa-pen"></i></a>
+                <a href="" class="btn btn-outline-danger btn-rounded"><i class="fas fa-trash"></i></a>
+            </td>
+          </div>
+        </div>
+      </a>
+    </div>
+    
+  {{/each}}
+  </div>
+</div>

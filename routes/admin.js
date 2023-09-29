@@ -2,6 +2,9 @@ import { Router } from "express";
 import User from "../models/User.js"
 import Lesson from "../models/Lesson.js";
 import bcrypt from "bcrypt"
+import UserLesson from "../models/UserLessons.js"
+import Restaurants from "../models/Restaurants.js";
+import Part from "../models/Part.js";
 const router = Router()
 
 router.get('/', async(req, res) => {
@@ -41,6 +44,53 @@ router.get('/delete-user/:id', async(req, res) => {
     await User.findByIdAndRemove(id)
     res.redirect('/users')
 })
+
+router.get('/restaurants', async(req, res) => {
+    const restaurantData = await Restaurants.find().lean()
+    console.log(restaurantData);
+    res.render('Restaurants', {
+        title: "Restaurants",
+        restaurantData: restaurantData,
+    })
+})
+
+// router.get('/parts', async(req, res) => {
+//     const partsData = await Part.find().lean()
+//     const partTitle = partsData.lessonsTypeName
+//     const lessonsByParts = await Lesson.find({ lessonPart: partTitle }).lean()
+//     const lessonsByPartsLen = lessonsByParts.length
+//     res.render('Parts', {
+//         title: "Parts",
+//         partsData: partsData,
+//         lessonsByParts: lessonsByParts,
+//         lessonsByPartsLen: lessonsByPartsLen,
+//     })
+// })
+
+router.get('/parts', async(req, res) => {
+    const partsData = await Part.find().lean();
+    const lessonsByParts = [];
+
+    for (const part of partsData) {
+        const partTitle = part.lessonsTypeName;
+        const lessons = await Lesson.find({ lessonPart: partTitle }).lean();
+        const lessonsByPartsLen = lessons.length;
+
+        lessonsByParts.push({
+            partTitle,
+            lessons,
+            lessonsByPartsLen,
+        });
+    }
+    console.log(lessonsByParts);
+    res.render('Parts', {
+        title: "Parts",
+        partsData,
+        lessonsByParts,
+    });
+});
+
+
 router.get('/logout', (req, res) => {
     res.redirect('/')
 })

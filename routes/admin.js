@@ -54,41 +54,21 @@ router.get('/restaurants', async(req, res) => {
     })
 })
 
-// router.get('/parts', async(req, res) => {
-//     const partsData = await Part.find().lean()
-//     const partTitle = partsData.lessonsTypeName
-//     const lessonsByParts = await Lesson.find({ lessonPart: partTitle }).lean()
-//     const lessonsByPartsLen = lessonsByParts.length
-//     res.render('Parts', {
-//         title: "Parts",
-//         partsData: partsData,
-//         lessonsByParts: lessonsByParts,
-//         lessonsByPartsLen: lessonsByPartsLen,
-//     })
-// })
-
 router.get('/parts', async(req, res) => {
-    const partsData = await Part.find().lean();
-    const lessonsByParts = [];
-
-    for (const part of partsData) {
-        const partTitle = part.lessonsTypeName;
-        const lessons = await Lesson.find({ lessonPart: partTitle }).lean();
-        const lessonsByPartsLen = lessons.length;
-
-        lessonsByParts.push({
-            partTitle,
-            lessons,
-            lessonsByPartsLen,
-        });
-    }
-    console.log(lessonsByParts);
+    const partsData = await Part.find().lean()
+    console.log(partsData);
     res.render('Parts', {
         title: "Parts",
-        partsData,
-        lessonsByParts,
-    });
-});
+        partsData: partsData,
+    })
+})
+
+router.get('/edit-parts/:id', async(req, res) => {
+    res.render('editParts', {
+        title: 'Edit parts'
+    })
+})
+
 
 
 router.get('/logout', (req, res) => {

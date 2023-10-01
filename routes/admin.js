@@ -64,8 +64,12 @@ router.get('/parts', async(req, res) => {
 })
 
 router.get('/edit-parts/:id', async(req, res) => {
+    const id = req.params.id
+    const partData = await Part.findById(id).lean()
+    console.log(partData);
     res.render('editParts', {
-        title: 'Edit parts'
+        title: 'Edit parts',
+        partData: partData,
     })
 })
 
@@ -102,5 +106,8 @@ router.post('/update-user/:id', async(req, res) => {
     res.redirect('/users')
 })
 
+router.post('/edit-parts/:id', async(req, res) => {
+
+})
 
 export default router

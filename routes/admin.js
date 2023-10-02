@@ -56,7 +56,6 @@ router.get('/restaurants', async(req, res) => {
 
 router.get('/parts', async(req, res) => {
     const partsData = await Part.find().lean()
-    console.log(partsData);
     res.render('Parts', {
         title: "Parts",
         partsData: partsData,
@@ -66,10 +65,11 @@ router.get('/parts', async(req, res) => {
 router.get('/edit-parts/:id', async(req, res) => {
     const id = req.params.id
     const partData = await Part.findById(id).lean()
-    console.log(partData);
+    const restaurantList = await Restaurants.find().lean()
     res.render('editParts', {
         title: 'Edit parts',
         partData: partData,
+        restaurantList: restaurantList,
     })
 })
 
@@ -106,8 +106,11 @@ router.post('/update-user/:id', async(req, res) => {
     res.redirect('/users')
 })
 
-router.post('/edit-parts/:id', async(req, res) => {
-
+router.post('/edit-part/:id', async(req, res) => {
+    const id = req.params.id
+    const {} = req.body
+    const updatedPart = await Part.findByIdAndUpdate(id, req.body)
+    res.redirect('/parts')
 })
 
 export default router

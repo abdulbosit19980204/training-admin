@@ -111,12 +111,21 @@
                                     <div class="valid-feedback">Looks good!</div>
                                     <div class="invalid-feedback">Please enter lesson's title address.</div>
                                 </div>
+                               
                                 <div class="mb-3 col-md-6">
-                                    <label for="lessonDescription" class="form-label">Description</label>
-                                    <input type="text" value="{{editedLessonDetails.lessonDescription}}" class="form-control" name="lessonDescription" placeholder="Description" required>
-                                    <small class="form-text text-muted">Your description must be 8-20 characters long, contain letters and numbers only.</small>
-                                    <div class="valid-feedback">Looks good!</div>
-                                    <div class="invalid-feedback">Please enter your password.</div>
+                                <label for="lessonDescription" class="form-label">Kitchen Section</label>
+                                <select name="lessonDescription" id="" class="form-select">
+                                    {{#if editedLessonDetails.lessonDescription}}
+                                    <option value="Sushibar" selected>{{editedLessonDetails.lessonDescription}}</option>
+                                    {{else}}
+                                    <option value="Sushibar" selected>Sushibar</option>
+                                    {{/if}}
+                                    <option value="Sushibar">Sushibar</option>
+                                    <option value="Garyachka">Goryachka</option>
+                                </select>
+                                
+                                <div class="valid-feedback">Looks good!</div>
+                                <div class="invalid-feedback">Please select a State.</div>
                                 </div>
                             </div>
                             <div class="mb-3">

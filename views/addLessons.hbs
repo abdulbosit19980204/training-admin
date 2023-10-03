@@ -77,11 +77,23 @@
                                     <label for="restaurant" class="form-label">Restaurant</label>
                                     <select name="restaurant" class="form-select" required>
                                         <option value="" selected>Choose...</option>
-                                        <option value="1">Yaponamama</option>
-                                        <option value="2">FeedUp</option>
+                                        {{#each restaurants}}
+                                        <option value="{{restaurantName}}">{{restaurantName}}</option>
+                                        {{/each}}
+                                       
+
                                     </select>
                                     <div class="valid-feedback">Looks good!</div>
                                     <div class="invalid-feedback">Please select a State.</div>
+                                </div><div class="mb-3 mt-3">
+                                <label for="kitchenSection" class="form-label">Kitchen Section</label>
+                                <select name="kitchenSection" id="" class="form-select">
+                                    <option value="Sushibar" selected>Sushibar</option>
+                                    <option value="Garyachka">Goryachka</option>
+                                </select>
+                                
+                                <div class="valid-feedback">Looks good!</div>
+                                <div class="invalid-feedback">Please select a State.</div>
                                 </div>
                                 
                                     <div class="mb-3">

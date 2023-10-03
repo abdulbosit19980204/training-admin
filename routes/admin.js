@@ -73,7 +73,11 @@ router.get('/edit-parts/:id', async(req, res) => {
     })
 })
 
-
+router.get('/delete-parts/:id', async(req, res) => {
+    const id = req.params.id
+    await Part.findByIdAndRemove(id)
+    res.redirect('/parts')
+})
 
 router.get('/logout', (req, res) => {
     res.redirect('/')
@@ -82,7 +86,7 @@ router.get('/logout', (req, res) => {
 // Post
 
 router.post('/update-user/:id', async(req, res) => {
-    const { firstName, lastName, email, password, userImg, adress, city, position, zip, status, admin } = req.body
+    const { firstName, lastName, phoneNumber, password, userImg, adress, city, position, zip, status, admin } = req.body
     const id = req.params.id
     const oldData = await User.findById(id).lean()
     const oldPassword = oldData.password
@@ -92,7 +96,7 @@ router.post('/update-user/:id', async(req, res) => {
         firstName: firstName,
         lastName: lastName,
         userImg: userImg,
-        email: email,
+        phoneNumber: phoneNumber,
         password: hashedPassword,
         adress: adress,
         city: city,

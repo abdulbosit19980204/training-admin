@@ -47,7 +47,13 @@ router.get('/my-lessons', async(req, res) => {
     return
 })
 
-//Posts
+
+router.get('/remove-lesson/:id', async(req, res) => {
+        const id = req.params.id
+        await Lesson.findByIdAndRemove(id)
+        res.redirect('/my-lessons')
+    })
+    //Posts
 
 router.post('/add-restaurant', async(req, res) => {
     const { restaurantName, restaurantImg } = req.body
@@ -66,7 +72,9 @@ router.post('/add-restaurant', async(req, res) => {
 })
 
 router.post('/add-lessons-part', async(req, res) => {
+    console.log(req.body);
     const { lessonsTypeName, lessonsTypeImg } = req.body
+
     if (!lessonsTypeName || !lessonsTypeImg) {
         req.flash('errorAddInformation', "All fields are required")
         res.redirect('/forms')
@@ -75,9 +83,10 @@ router.post('/add-lessons-part', async(req, res) => {
     const PartData = {
         lessonsTypeName: lessonsTypeName,
         lessonsTypeImg: lessonsTypeImg,
+
     }
 
-    const lessonsPart = await Part.create(PartData)
+    const lessonsPart = await Part.create(req.body)
     res.redirect('/forms')
     return
 })

@@ -31,8 +31,8 @@ router.get('/logout', (req, res) => {
     })
     //Posts
 router.post('/login', async(req, res) => {
-    const { email, password, remember } = req.body
-    const exsistAdmin = await User.findOne({ email })
+    const { phoneNumber, password, remember } = req.body
+    const exsistAdmin = await User.findOne({ phoneNumber })
     if (!exsistAdmin) {
 
         req.flash("loginError", "You should check in on some of those fields below")
@@ -62,7 +62,7 @@ router.post('/login', async(req, res) => {
     res.redirect('/')
 })
 router.post('/add-user', async(req, res) => {
-    const { firstName, lastName, userImg, email, password, adress, city, position, zip, admin, status } = req.body
+    const { firstName, lastName, userImg, phoneNumber, password, adress, city, position, zip, admin, status } = req.body
     if (!firstName || !lastName || !email || !password) {
         req.flash('userAddError', "All fields are required")
         res.redirect('/add-user')
@@ -73,7 +73,7 @@ router.post('/add-user', async(req, res) => {
         firstName: firstName,
         lastName: lastName,
         userImg: userImg ? userImg : "https://st.depositphotos.com/3079665/3991/v/450/depositphotos_39915779-stock-illustration-chef-giving-thumbs-up.jpg",
-        email: email,
+        phoneNumber: phoneNumber,
         password: hashedPassword,
         adress: adress,
         city: city,
@@ -82,7 +82,7 @@ router.post('/add-user', async(req, res) => {
         admin: admin ? 'on' : 'off',
         status: status ? 'on' : 'off',
     }
-    const isUserExsist = await User.findOne({ email })
+    const isUserExsist = await User.findOne({ phoneNumber })
     if (isUserExsist) {
         req.flash('userAddError', 'User is already exsist')
         res.redirect('/add-user')

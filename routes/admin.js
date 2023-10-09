@@ -106,7 +106,6 @@ router.post('/update-user/:id', async(req, res) => {
         status: status ? 'on' : 'off',
     }
     const updatedUser = await User.findByIdAndUpdate(id, updateUserData)
-    console.log(updatedUser);
     res.redirect('/users')
 })
 

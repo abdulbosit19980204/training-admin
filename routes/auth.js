@@ -63,7 +63,7 @@ router.post('/login', async(req, res) => {
 })
 router.post('/add-user', async(req, res) => {
     const { firstName, lastName, userImg, phoneNumber, password, adress, city, position, zip, admin, status } = req.body
-    if (!firstName || !lastName || !email || !password) {
+    if (!firstName || !lastName || !phoneNumber || !password) {
         req.flash('userAddError', "All fields are required")
         res.redirect('/add-user')
         return

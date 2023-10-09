@@ -5,6 +5,8 @@ const PartSchema = new Schema({
     lessonsTypeImg: { type: String, required: true },
     restaurant: { type: String, required: true },
     kitchenSection: { type: String, required: true },
+}, {
+    timestamps: true,
 })
 
 const Part = model("Part", PartSchema)

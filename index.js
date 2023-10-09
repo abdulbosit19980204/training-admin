@@ -10,6 +10,7 @@ import 'dotenv/config'
 import AuthRouter from "./routes/auth.js"
 import AdminRouter from "./routes/admin.js"
 import LessonsRouter from "./routes/lessons.js"
+import AddQuizRouter from "./routes/quiz.js"
 import session from "express-session"
 import userMiddleware from "./middleware/user.js"
 import helpers from "./utils/index.js"
@@ -31,6 +32,7 @@ app.use(flash())
 app.use(AuthRouter)
 app.use(AdminRouter)
 app.use(LessonsRouter)
+app.use(AddQuizRouter)
 
 const startApp = () => {
     try {

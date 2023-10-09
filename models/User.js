@@ -13,6 +13,8 @@ const UserSchema = new Schema({
     admin: { type: String, required: true },
     status: { type: String, required: true },
 
+}, {
+    timestamps: true,
 })
 
 const User = model("User", UserSchema)

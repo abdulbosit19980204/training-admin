@@ -189,6 +189,24 @@
                                     <div class="valid-feedback">Looks good!</div>
                                     <div class="invalid-feedback">Please enter a Zip code.</div>
                                 </div>
+                                <div class="mb-3 col-md-2">
+                                    <label for="zip" class="form-label">Lesson status old</label>
+                                    <div class="col-sm-10">
+                                        {{#ifequal editedLessonDetails.lessonStatus 'old'}}
+                                        <div class="form-check form-switch">
+                                            <input id="lessonStatus" name="lessonStatus" class="form-check-input" type="checkbox" checked>
+                                            <label class="form-check-label" for="lessonStatus">Old</label>
+                                        </div>
+                                        {{else}}
+                                        <div class="form-check form-switch">
+                                            <input id="lessonStatus" name="lessonStatus" class="form-check-input" type="checkbox" >
+                                            <label class="form-check-label" for="lessonStatus">Old</label>
+                                        </div>
+                                        
+                                        {{/ifequal}}
+                                    </div>
+                                </div>
+                                
                             </div>
                             <div class="mb-3">
                                 <div class="form-check">

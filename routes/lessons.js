@@ -108,13 +108,14 @@ router.post('/add-lesson', userMiddleware, async(req, res) => {
 
 router.post('/edit-lesson/:id', async(req, res) => {
     const { lessonTitle, lessonDescription, lessonimgPath, lessonDetails, lessonsPart } = req.body
+    const lessonStatus = req.body.lessonStatus ? "old" : "new"
     const id = req.params.id
     if (!lessonTitle || !lessonDescription || !lessonDetails) {
         req.flash('errorEditLesson', 'Please add all important information')
         res.redirect('/my-lessons')
         return
     }
-    const updatedLesson = await Lesson.findByIdAndUpdate(id, req.body)
+    const updatedLesson = await Lesson.findByIdAndUpdate(id, {...req.body, lessonStatus })
     res.redirect('/my-lessons')
 })
 export default router
